@@ -11,7 +11,6 @@ import (
 	"goscraper/src/types"
 	"goscraper/src/utils"
 	"log"
-	"net"
 	"os"
 
 	"time"
@@ -381,14 +380,9 @@ func main() {
 		port = "8080"
 	}
 	log.Printf("Starting server on port %s...", port)
-	ln, err := net.Listen("tcp", "[::]:"+port)
-	if err != nil {
-		log.Fatalf("Failed to bind: %v", err)
-	}
-	log.Printf("Starting server on port %s...", port)
-	if err := app.Listener(ln); err != nil {
-		log.Printf("Server error: %+v", err)
-	}
+
+	if err := app.Listen("0.0.0.0:" + port); err != nil {
+	log.Fatalf("Server failed to start: %v", err)
 }
 
 func fetchAllData(token string) (map[string]interface{}, error) {
