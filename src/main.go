@@ -382,8 +382,10 @@ func main() {
 	log.Printf("Starting server on port %s...", port)
 
 	if err := app.Listen("0.0.0.0:" + port); err != nil {
-	log.Fatalf("Server failed to start: %v", err)
+		log.Fatalf("Server failed to start: %v", err)
+	}
 }
+
 
 func fetchAllData(token string) (map[string]interface{}, error) {
 	type result struct {
